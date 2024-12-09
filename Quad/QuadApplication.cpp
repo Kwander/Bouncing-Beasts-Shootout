@@ -21,6 +21,10 @@ namespace Quad {
 
 		Renderer::Init();
 
+		SetWindowEventHandler(
+			[this](const WindowEvent& event) {DefaultWindowEventHandler(event); });
+
+
 		Initialize(); //defined by game creators
 		int x{ 100 };
 
@@ -63,6 +67,16 @@ namespace Quad {
 	void QuadApplication::SetWindowEventHandler(std::function<void(const WindowEvent&)> newHandler){
 		Quad::QuadWindow::GetWindow()->SetWindowEventHandler(newHandler);
 	}
+
+	void QuadApplication::DefaultWindowEventHandler(const WindowEvent& event)
+	{
+		if (event.GetWindowAction() == WindowEvent::WindowAction::Close)
+			mShouldContinue = false;
+
+		
+	}
+
+
 
 }
 

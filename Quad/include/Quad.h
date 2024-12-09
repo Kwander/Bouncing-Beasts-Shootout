@@ -6,3 +6,6 @@
 #include "../Image.h"
 #include "../Shaders.h"
 #include "../Renderer.h"
+#include "../QuadEvents.h"
+#include "../KeyCodes.h"
+

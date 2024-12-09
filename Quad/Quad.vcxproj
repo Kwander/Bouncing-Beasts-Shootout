@@ -142,6 +142,7 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageImpl.h" />
     <ClInclude Include="include\Quad.h" />
+    <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="QuadApplication.h" />
     <ClInclude Include="QuadEvents.h" />
