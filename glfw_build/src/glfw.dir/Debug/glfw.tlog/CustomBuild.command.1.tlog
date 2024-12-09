@@ -1,0 +1,10 @@
+^C:\CODE\F24_KEVIN_WANDER\KEVIN_WANDER_FALL_24\GLFW\SRC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw -BC:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build --check-stamp-file C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

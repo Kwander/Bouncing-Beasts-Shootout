@@ -3,7 +3,7 @@
 
 class MyGameApplication : public Quad::QuadApplication {
 	virtual void Initialize() override {
-		std::cout << "Starting..." << std::endl;
+		QUAD_LOG("Starting...");
 	}
 
 	virtual void Update() override {

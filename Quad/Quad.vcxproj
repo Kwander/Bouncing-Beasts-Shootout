@@ -40,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -102,9 +102,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QUAD_LIB;QUAD_MS_COMPILER;QUAD_DEBUG=2;QUAD_GLFW;QUAD_OPENGL_STBI</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)stbi;$(SolutionDir)Quad;$(SolutionDir)glfw/include;$(SolutionDir)glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,8 +120,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);QUAD_LIB;QUAD_MS_COMPILER;QUAD_GLFW;QUAD_OPENGL_STBI</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)stbi;$(SolutionDir)Quad;$(SolutionDir)glfw/include;$(SolutionDir)glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,12 +134,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="codeGLFW\WindowGLFW.h" />
+    <ClInclude Include="codeOpenGL\OpenGLImage.h" />
+    <ClInclude Include="codeOpenGL\OpenGLRenderer.h" />
+    <ClInclude Include="codeOpenGL\OpenGLShaders.h" />
     <ClInclude Include="EntryPoint.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="ImageImpl.h" />
     <ClInclude Include="include\Quad.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="QuadApplication.h" />
+    <ClInclude Include="QuadEvents.h" />
+    <ClInclude Include="QuadUtilities.h" />
+    <ClInclude Include="QuadWindow.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RendererImpl.h" />
+    <ClInclude Include="Shaders.h" />
+    <ClInclude Include="ShadersImpl.h" />
+    <ClInclude Include="WindowImpl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="codeGLFW\WindowGLFW.cpp" />
+    <ClCompile Include="codeOpenGL\OpenGLImage.cpp" />
+    <ClCompile Include="codeOpenGL\OpenGLRenderer.cpp" />
+    <ClCompile Include="codeOpenGL\OpenGLShaders.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="QuadApplication.cpp" />
+    <ClCompile Include="QuadEvents.cpp" />
+    <ClCompile Include="QuadWindow.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Shaders.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\glad\glad.vcxproj">
+      <Project>{a4025633-ac72-418b-bac5-b03bcb582a4b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\glfw_build\src\glfw.vcxproj">
+      <Project>{459a5682-a9b6-31ae-8db2-37569a762e66}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\stbi\stbi.vcxproj">
+      <Project>{da2ec001-154f-4688-ab39-fd0a2de5fe42}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

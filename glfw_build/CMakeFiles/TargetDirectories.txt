@@ -1,0 +1,4 @@
+C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/CMakeFiles/ALL_BUILD.dir
+C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/CMakeFiles/ZERO_CHECK.dir
+C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/src/CMakeFiles/glfw.dir
+C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/src/CMakeFiles/update_mappings.dir

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw_build\CMakeFiles\e1191cda6435fe76d484cc2afa665098\update_mappings.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw\src\mappings.h.in">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw\CMake\GenerateMappings.cmake" />
+    <None Include="C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw_build\src\CMakeFiles\update_mappings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B15DE2E1-C76B-3F0E-80FF-DBF5D9B5C7B2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6B46BB69-B52D-300B-A5E7-C4372C406510}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
