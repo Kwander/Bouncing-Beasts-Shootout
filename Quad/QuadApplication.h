@@ -8,6 +8,8 @@ constexpr int FPS_RATE{ 60 };
 namespace Quad {
 	class QUAD_API QuadApplication {
 	public:
+		QuadApplication();
+
 		void Run();
 		virtual void Initialize();
 		virtual void Update();

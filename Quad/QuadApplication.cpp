@@ -14,7 +14,7 @@
 #include "stb_image.h"
 
 namespace Quad {
-	void Quad::QuadApplication::Run()
+	QuadApplication::QuadApplication()
 	{
 		Quad::QuadWindow::Init();
 		Quad::QuadWindow::GetWindow()->CreateWindow(1000, 800, "test");
@@ -23,6 +23,10 @@ namespace Quad {
 
 		SetWindowEventHandler(
 			[this](const WindowEvent& event) {DefaultWindowEventHandler(event); });
+
+	}
+	void Quad::QuadApplication::Run()
+	{
 
 
 		Initialize(); //defined by game creators
