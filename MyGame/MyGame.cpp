@@ -8,6 +8,7 @@ class MyGameApplication : public Quad::QuadApplication {
 
 	virtual void Update() override {
 		//std::cout << "Running " << std::endl;
+		
 
 	}
 };

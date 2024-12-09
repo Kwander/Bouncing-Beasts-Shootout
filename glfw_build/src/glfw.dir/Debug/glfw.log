@@ -1,3 +1,6 @@
-﻿  LINK : C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\x64\Debug\glfw3.dll not found or not built by the last incremental link; performing full link
-     Creating library C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/src/Debug/glfw3dll.lib and object C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/src/Debug/glfw3dll.exp
-  glfw.vcxproj -> C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\x64\Debug\glfw3.dll
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets(2176,5): warning : The referenced project 'C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw_build\ZERO_CHECK.vcxproj' does not exist.
+  Building Custom Rule C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw/src/CMakeLists.txt
+  CMake is re-running because C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw_build/src/CMakeFiles/generate.stamp dependency file is missing.
+CUSTOMBUILD : CMake error : The source directory "C:/code/F24_Kevin_Wander/Kevin_Wander_Fall_24/glfw" does not exist.
+  Specify --help for usage, or press the help button on the CMake GUI.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): error MSB8066: Custom build for 'C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw\src\CMakeLists.txt' exited with code 1.
