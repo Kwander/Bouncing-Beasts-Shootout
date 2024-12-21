@@ -2,7 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\x64\Debug\glfw3.dll</FullPath>
+      <FullPath>C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw_build\x64\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw_build\src\Debug\glfw3.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
