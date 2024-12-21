@@ -20,10 +20,19 @@ namespace Quad {
 	{
 		mInstance->mImplementation->Draw(pic, xCoord, yCoord);
 	}
-	void Renderer::Draw(Image& pic, int xCoord, int yCoord, Shaders shaders)
+	void Renderer::Draw(Image& pic, int xCoord, int yCoord, Shaders& shaders)
 	{
 		mInstance->mImplementation->Draw(pic, xCoord, yCoord, shaders);
 
+	}
+	void Renderer::Draw(Unit& unit)
+	{
+		if (unit.mIsVisible) Draw(unit.mImage, unit.mXCoord, unit.mYCoord);
+	}
+	void Renderer::Draw(Unit& unit, Shaders& shaders)
+	{
+		if (unit.mIsVisible) 
+			Draw(unit.mImage, unit.mXCoord, unit.mYCoord, shaders);
 	}
 	void Renderer::ClearScreen()
 	{

@@ -249,6 +249,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <None Include="C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw_build\src\CMakeFiles\update_mappings">
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="C:\code\F24_Kevin_Wander\Kevin_Wander_Fall_24\glfw_build\ZERO_CHECK.vcxproj">
       <Project>{071F1F3C-409D-309F-8A3E-FEB310883619}</Project>

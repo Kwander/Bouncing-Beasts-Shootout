@@ -1,5 +1,7 @@
 #pragma once
 
+#define QUAD_GLFW
+
 
 #ifdef QUAD_GLFW
 	#define QUAD_KEY_SPACE              32

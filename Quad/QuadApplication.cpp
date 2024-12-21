@@ -34,16 +34,16 @@ namespace Quad {
 
 		mNextFrameTime = std::chrono::steady_clock::now() + mFrameDuration;
 
-		Quad::Image pic("../Quad/QuadAssets/Images/cookie.jpg");
+		//Quad::Image pic("../Quad/QuadAssets/Images/cookie.jpg");
 
 
 		while (mShouldContinue) {
-			Update();
-
 			Renderer::ClearScreen();
 
-			Renderer::Draw(pic, x, 100);
-			x += 2;
+			Update();
+
+			//Renderer::Draw(pic, x, 100);
+			//x += 2;
 
 			std::this_thread::sleep_until(mNextFrameTime);
 			mNextFrameTime = std::chrono::steady_clock::now() + mFrameDuration;
