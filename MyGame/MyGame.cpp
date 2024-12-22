@@ -7,20 +7,30 @@ class MyGameApplication : public Quad::QuadApplication
 	{
 		QUAD_LOG("Starting...");
 
-		SetKeyEventHandler([this](const Quad::KeyEvent& event) {MyKeysHandler(event);  });
+		SetKeyEventHandler([this](const Quad::KeyEvent &event)
+						   { MyKeysHandler(event); });
 	}
 
 	virtual void Update() override
 	{
 		Quad::Renderer::Draw(hero);
+		if (cursor.IsClickingOn(hero))
+		{
+			QUAD_LOG("Clicked on hero!");
+		}
 		// std::cout << "Running " << std::endl;
 	}
-private:
-	Quad::Unit hero{ "../Quad/QuadAssets/Images/cookie.jpg", 100,100 };
 
-	void MyKeysHandler(const Quad::KeyEvent& event) {
-		if (event.GetKeyAction() == Quad::KeyEvent::KeyAction::Press) {
-			switch (event.GetKeyCode()) {
+private:
+	Quad::Unit hero{"../Quad/QuadAssets/Images/cookie.jpg", 100, 100};
+	Quad::Cursor cursor;
+
+	void MyKeysHandler(const Quad::KeyEvent &event)
+	{
+		if (event.GetKeyAction() == Quad::KeyEvent::KeyAction::Press)
+		{
+			switch (event.GetKeyCode())
+			{
 			case QUAD_KEY_LEFT:
 				hero.UpdateXCoord(-10);
 				break;
@@ -30,7 +40,6 @@ private:
 			}
 		}
 	}
-
 };
 
 QUAD_GAME_START(MyGameApplication)

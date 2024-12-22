@@ -29,6 +29,11 @@ set (SOURCE_FILES
 	QuadUtilities.h
 	Unit.h
 	Unit.cpp
+	Cursor.h
+	Cursor.cpp
+	CursorImpl.h
+	codeGLFW/GLFWCursor.h
+	codeGLFW/GLFWCursor.cpp
 )
 
 add_library(Quad SHARED ${SOURCE_FILES})
