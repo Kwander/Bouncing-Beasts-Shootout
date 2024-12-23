@@ -14,10 +14,10 @@ class MyGameApplication : public Quad::QuadApplication
 		currentLevel = std::make_unique<GoblinLevel>();
 
 		// Initialize guns
-		guns.push_back(std::make_unique<Gun>("Assets/gun1hold.png"));
-		guns.push_back(std::make_unique<Gun>("Assets/gun2hold.png"));
-		guns.push_back(std::make_unique<Gun>("Assets/gun3hold.png"));
-		guns.push_back(std::make_unique<Gun>("Assets/gun4hold.png"));
+		guns.push_back(std::make_unique<Gun>("Assets/gun1hold.png", "Assets/gun1fire.png"));
+		guns.push_back(std::make_unique<Gun>("Assets/gun2hold.png", "Assets/gun2fire.png"));
+		guns.push_back(std::make_unique<Gun>("Assets/gun3hold.png", "Assets/gun3fire.png"));
+		guns.push_back(std::make_unique<Gun>("Assets/gun4hold.png", "Assets/gun4fire.png"));
 		currentGunIndex = 0;
 	}
 
@@ -36,6 +36,15 @@ class MyGameApplication : public Quad::QuadApplication
 			currentLevel->Update();
 			currentLevel->Draw();
 			guns[currentGunIndex]->Draw();
+
+			if (cursor.IsClicking())
+			{
+				guns[currentGunIndex]->TriggerFire();
+			}
+			else
+			{
+				guns[currentGunIndex]->SetFiring(false);
+			}
 		}
 	}
 

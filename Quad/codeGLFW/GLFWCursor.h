@@ -14,6 +14,7 @@ namespace Quad
 
         virtual void GetPosition(double &x, double &y) const override;
         virtual bool IsClickingOn(const Unit &unit) const override;
+        virtual bool IsClicking() const override;
         virtual void SetCursorMode(int mode) override;
 
     private:

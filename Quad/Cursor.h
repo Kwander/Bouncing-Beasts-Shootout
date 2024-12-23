@@ -14,6 +14,7 @@ namespace Quad
 
         void GetPosition(double &x, double &y) const;
         bool IsClickingOn(const Unit &unit) const;
+        bool IsClicking() const;
         void SetCursorMode(int mode);
 
     private:

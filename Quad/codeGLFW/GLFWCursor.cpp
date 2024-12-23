@@ -40,4 +40,9 @@ namespace Quad
     {
         return static_cast<GLFWwindow *>(QuadWindow::GetWindow()->GetImplementation()->GetNativeWindow());
     }
+
+    bool GLFWCursor::IsClicking() const
+    {
+        return glfwGetMouseButton(GetCurrentWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
+    }
 }

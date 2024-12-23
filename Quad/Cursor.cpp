@@ -27,4 +27,9 @@ namespace Quad
     {
         mImplementation->SetCursorMode(mode);
     }
+
+    bool Cursor::IsClicking() const
+    {
+        return mImplementation->IsClicking();
+    }
 }
