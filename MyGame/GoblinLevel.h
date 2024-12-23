@@ -2,6 +2,7 @@
 #include "Level.h"
 #include "Enemy.h"
 #include "NumberDisplay.h"
+#include "BulletWound.h"
 #include <vector>
 #include <memory>
 
@@ -16,8 +17,8 @@ public:
 private:
     Quad::Unit gameOverScreen{"Assets/goblinlvlgameover.png", 0, 0};
     NumberDisplay numberDisplay;
-
     std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<std::unique_ptr<BulletWound>> bulletWounds;
     float spawnTimer{0.0f};
     static constexpr float SPAWN_INTERVAL{1.0f};
     static constexpr int MAX_ENEMIES{10};

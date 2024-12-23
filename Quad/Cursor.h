@@ -12,7 +12,7 @@ namespace Quad
     public:
         Cursor();
 
-        void GetPosition(double &x, double &y) const;
+        void GetPosition(int &x, int &y) const;
         bool IsClickingOn(const Unit &unit) const;
         bool IsClicking() const;
         void SetCursorMode(int mode);

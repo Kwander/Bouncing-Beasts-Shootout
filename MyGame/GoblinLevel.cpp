@@ -17,6 +17,19 @@ void GoblinLevel::Update()
         }
     }
 
+    for (auto it = bulletWounds.begin(); it != bulletWounds.end();)
+    {
+        (*it)->Update();
+        if ((*it)->IsExpired())
+        {
+            it = bulletWounds.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+
     if (spawnedEnemies < MAX_ENEMIES)
     {
         spawnTimer += 1.0f / 60.0f;
@@ -36,11 +49,18 @@ void GoblinLevel::HandleClick(const Quad::Cursor &cursor, bool canFire, int dama
     if (!canFire)
         return;
 
+    int x, y;
+    cursor.GetPosition(x, y);
+
+    int windowHeight = Quad::QuadWindow::GetWindow()->GetHeight();
+    y = windowHeight - y;
+
     for (auto &enemy : enemies)
     {
         if (enemy->IsClicked(cursor))
         {
             enemy->Hit(damage);
+            bulletWounds.push_back(std::make_unique<BulletWound>(x, y));
         }
     }
 }
@@ -57,6 +77,10 @@ void GoblinLevel::Draw()
         for (auto &enemy : enemies)
         {
             enemy->Draw();
+        }
+        for (auto &wound : bulletWounds)
+        {
+            wound->Draw();
         }
         numberDisplay.DrawHealthDisplay(GetPlayerHealth(), GetMaxPlayerHealth(), 15, 15);
     }

@@ -135,6 +135,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BulletWound.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GoblinLevel.cpp" />
     <ClCompile Include="Gun.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="NumberDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletWound.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GoblinLevel.h" />
     <ClInclude Include="Gun.h" />

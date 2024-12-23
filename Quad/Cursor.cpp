@@ -13,9 +13,12 @@ namespace Quad
 #endif
     }
 
-    void Cursor::GetPosition(double &x, double &y) const
+    void Cursor::GetPosition(int &x, int &y) const
     {
-        mImplementation->GetPosition(x, y);
+        double xPos, yPos;
+        mImplementation->GetPosition(xPos, yPos);
+        x = static_cast<int>(xPos);
+        y = static_cast<int>(yPos);
     }
 
     bool Cursor::IsClickingOn(const Unit &unit) const
