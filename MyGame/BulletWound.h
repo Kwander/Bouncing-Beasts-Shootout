@@ -4,7 +4,13 @@
 class BulletWound
 {
 public:
-    BulletWound(int x, int y, bool alternateImage = false);
+    enum class WoundType
+    {
+        GOBLIN,
+        CAT
+    };
+
+    BulletWound(int x, int y, WoundType type, bool alternateImage = false);
     void Draw();
     bool IsExpired() const { return lifetime >= MAX_LIFETIME; }
     void Update();

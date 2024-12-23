@@ -4,10 +4,10 @@
 class Enemy
 {
 public:
-    Enemy(const std::string &imagePath, int startX, int startY);
+    Enemy(const std::string& imagePath, int startX, int startY, int hitsRequired = 2);
     void Update();
     void Draw();
-    bool IsClicked(const Quad::Cursor &cursor) const;
+    bool IsClicked(const Quad::Cursor& cursor) const;
     bool IsActive() const { return active; }
     void SetActive(bool isActive) { active = isActive; }
     bool ShouldDealDamage();
@@ -22,5 +22,5 @@ private:
     static constexpr float DAMAGE_INTERVAL{2.5f};
     bool isFirstFrame{true};
     int hits{0};
-    static constexpr int HITS_TO_DIE{2};
+    int hitsToKill;
 };

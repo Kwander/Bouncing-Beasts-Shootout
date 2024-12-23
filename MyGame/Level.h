@@ -15,12 +15,16 @@ public:
     int GetMaxPlayerHealth() const { return maxPlayerHealth; }
     void SetPlayerHealth(int health);
     bool IsGameOver() const { return isGameOver; }
+    bool CanTransition() const { return screenTimer >= SCREEN_DELAY; }
+    void ResetScreenTimer() { screenTimer = 0.0f; }
 
 protected:
     Quad::Unit background;
     int playerHealth{100};
     const int maxPlayerHealth{100};
     bool isGameOver{false};
+    float screenTimer{0.0f};
+    static constexpr float SCREEN_DELAY{2.0f};
     Quad::Unit numbers[10] = {
         {"Assets/numbers/0.jpg", 0, 0},
         {"Assets/numbers/1.jpg", 0, 0},

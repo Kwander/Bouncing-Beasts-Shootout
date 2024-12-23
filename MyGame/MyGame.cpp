@@ -2,6 +2,7 @@
 #include "Level.h"
 #include "GoblinLevel.h"
 #include "Gun.h"
+#include "CatLevel.h"
 #include <vector>
 #include <memory>
 
@@ -26,24 +27,71 @@ class MyGameApplication : public Quad::QuadApplication
 	{
 		if (isStartScreen)
 		{
+			startScreenTimer += 1.0f / 60.0f;
 			Quad::Renderer::Draw(startScreen);
-			if (cursor.IsClickingOn(startScreen))
+			if (cursor.IsClicking() && startScreenTimer >= SCREEN_DELAY)
 			{
 				isStartScreen = false;
+				currentLevel = std::make_unique<GoblinLevel>();
 			}
 		}
 		else
 		{
 			currentLevel->Update();
 			currentLevel->Draw();
-			guns[currentGunIndex]->Update();
-			guns[currentGunIndex]->Draw();
 
+			// Only draw gun if we're not in a game over or level cleared state
+			if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
+			{
+				if (!goblinLevel->IsGameOver() && !goblinLevel->IsLevelCleared())
+				{
+					guns[currentGunIndex]->Update();
+					guns[currentGunIndex]->Draw();
+				}
+			}
+			else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
+			{
+				if (!catLevel->IsGameOver() && !catLevel->IsLevelCleared())
+				{
+					guns[currentGunIndex]->Update();
+					guns[currentGunIndex]->Draw();
+				}
+			}
+
+			// Check for level completion or game over
+			if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
+			{
+				if (goblinLevel->IsGameOver() && cursor.IsClicking() && goblinLevel->CanTransition())
+				{
+					isStartScreen = true;
+					startScreenTimer = 0.0f;
+					currentLevel = std::make_unique<GoblinLevel>();
+				}
+				else if (goblinLevel->IsLevelCleared() && cursor.IsClicking() && goblinLevel->CanTransition())
+				{
+					currentLevel = std::make_unique<CatLevel>();
+				}
+			}
+			else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
+			{
+				if (catLevel->IsGameOver() && cursor.IsClicking() && catLevel->CanTransition())
+				{
+					isStartScreen = true;
+					startScreenTimer = 0.0f;
+					currentLevel = std::make_unique<GoblinLevel>();
+				}
+			}
+
+			// Handle shooting
 			if (cursor.IsClicking())
 			{
 				if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
 				{
 					goblinLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
+				}
+				else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
+				{
+					catLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
 				}
 				guns[currentGunIndex]->TriggerFire();
 			}
@@ -61,6 +109,8 @@ private:
 	std::unique_ptr<Level> currentLevel;
 	std::vector<std::unique_ptr<Gun>> guns;
 	size_t currentGunIndex;
+	float startScreenTimer{0.0f};
+	static constexpr float SCREEN_DELAY{2.0f};
 
 	void MyKeysHandler(const Quad::KeyEvent &event)
 	{

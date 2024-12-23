@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const std::string &imagePath, int startX, int startY)
-    : sprite(imagePath, startX, startY)
+Enemy::Enemy(const std::string &imagePath, int startX, int startY, int hitsRequired)
+    : sprite(imagePath, startX, startY), hitsToKill(hitsRequired)
 {
 }
 
@@ -51,7 +51,7 @@ void Enemy::Hit(int damage)
 {
     hits += damage;
     QUAD_LOG("Enemy hit! Current hits: " << hits);
-    if (hits >= HITS_TO_DIE)
+    if (hits >= hitsToKill)
     {
         active = false;
         QUAD_LOG("Enemy died!");
