@@ -6,28 +6,35 @@ class MyGameApplication : public Quad::QuadApplication
 	virtual void Initialize() override
 	{
 		QUAD_LOG("Starting...");
-
 		SetKeyEventHandler([this](const Quad::KeyEvent &event)
 						   { MyKeysHandler(event); });
 	}
 
 	virtual void Update() override
 	{
-		Quad::Renderer::Draw(hero);
-		if (cursor.IsClickingOn(hero))
+		if (isStartScreen)
 		{
-			QUAD_LOG("Clicked on hero!");
+			Quad::Renderer::Draw(startScreen);
+			if (cursor.IsClickingOn(startScreen))
+			{
+				isStartScreen = false;
+			}
 		}
-		// std::cout << "Running " << std::endl;
+		else
+		{
+			Quad::Renderer::Draw(hero);
+		}
 	}
 
 private:
+	bool isStartScreen{true};
+	Quad::Unit startScreen{"Assets/START_SCREEN.png", 0, 0};
 	Quad::Unit hero{"../Quad/QuadAssets/Images/cookie.jpg", 100, 100};
 	Quad::Cursor cursor;
 
 	void MyKeysHandler(const Quad::KeyEvent &event)
 	{
-		if (event.GetKeyAction() == Quad::KeyEvent::KeyAction::Press)
+		if (!isStartScreen && event.GetKeyAction() == Quad::KeyEvent::KeyAction::Press)
 		{
 			switch (event.GetKeyCode())
 			{
