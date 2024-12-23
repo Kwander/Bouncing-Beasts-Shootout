@@ -1,5 +1,6 @@
 #include "Quad.h"
 #include "Level.h"
+#include "GoblinLevel.h"
 #include "Gun.h"
 #include <vector>
 #include <memory>

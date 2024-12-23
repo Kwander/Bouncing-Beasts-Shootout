@@ -1,26 +1,14 @@
 #pragma once
 #include "Quad.h"
-#include <string>
 
-class Level
+class NumberDisplay
 {
 public:
-    Level(const std::string &backgroundPath);
-    virtual ~Level() = default;
+    NumberDisplay();
+    void DrawNumber(int num, int x, int y);
+    void DrawHealthDisplay(int currentHealth, int maxHealth, int x, int y);
 
-    virtual void Update();
-    virtual void Draw();
-
-    int GetPlayerHealth() const { return playerHealth; }
-    int GetMaxPlayerHealth() const { return maxPlayerHealth; }
-    void SetPlayerHealth(int health);
-    bool IsGameOver() const { return isGameOver; }
-
-protected:
-    Quad::Unit background;
-    int playerHealth{100};
-    const int maxPlayerHealth{100};
-    bool isGameOver{false};
+private:
     Quad::Unit numbers[10] = {
         {"Assets/numbers/0.jpg", 0, 0},
         {"Assets/numbers/1.jpg", 0, 0},

@@ -6,14 +6,14 @@
 #include "Shaders.h"
 #include "Renderer.h"
 
-
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
 
 #include "stb_image.h"
 
-namespace Quad {
+namespace Quad
+{
 	QuadApplication::QuadApplication()
 	{
 		Quad::QuadWindow::Init();
@@ -22,28 +22,27 @@ namespace Quad {
 		Renderer::Init();
 
 		SetWindowEventHandler(
-			[this](const WindowEvent& event) {DefaultWindowEventHandler(event); });
-
+			[this](const WindowEvent &event)
+			{ DefaultWindowEventHandler(event); });
 	}
 	void Quad::QuadApplication::Run()
 	{
 
-
-		Initialize(); //defined by game creators
-		int x{ 100 };
+		Initialize(); // defined by game creators
+		int x{100};
 
 		mNextFrameTime = std::chrono::steady_clock::now() + mFrameDuration;
 
-		//Quad::Image pic("../Quad/QuadAssets/Images/cookie.jpg");
+		// Quad::Image pic("../Quad/QuadAssets/Images/cookie.jpg");
 
-
-		while (mShouldContinue) {
+		while (mShouldContinue)
+		{
 			Renderer::ClearScreen();
 
 			Update();
 
-			//Renderer::Draw(pic, x, 100);
-			//x += 2;
+			// Renderer::Draw(pic, x, 100);
+			// x += 2;
 
 			std::this_thread::sleep_until(mNextFrameTime);
 			mNextFrameTime = std::chrono::steady_clock::now() + mFrameDuration;
@@ -64,29 +63,27 @@ namespace Quad {
 	{
 	}
 
-	void QuadApplication::SetKeyEventHandler(const std::function<void(const KeyEvent&)>& newHandler) {
+	void QuadApplication::SetKeyEventHandler(const std::function<void(const KeyEvent &)> &newHandler)
+	{
 		Quad::QuadWindow::GetWindow()->SetKeyEventHandler(newHandler);
 	}
 
-	void QuadApplication::SetWindowEventHandler(std::function<void(const WindowEvent&)> newHandler){
+	void QuadApplication::SetWindowEventHandler(std::function<void(const WindowEvent &)> newHandler)
+	{
 		Quad::QuadWindow::GetWindow()->SetWindowEventHandler(newHandler);
 	}
 
-	void QuadApplication::DefaultWindowEventHandler(const WindowEvent& event)
+	void QuadApplication::DefaultWindowEventHandler(const WindowEvent &event)
 	{
 		if (event.GetWindowAction() == WindowEvent::WindowAction::Close)
 			mShouldContinue = false;
-
-		
 	}
-
-
 
 }
 
 /*
 Quad::Image pic("Assets/image1.png"};
 Quad::Shader shader{"vert.glsl", "frag.glsl"};   Textures prob not used
-Quad::Renderer::Get()->Draw(pic, 100, 200, shader); 
+Quad::Renderer::Get()->Draw(pic, 100, 200, shader);
 
 */

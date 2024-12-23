@@ -135,13 +135,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GoblinLevel.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MyGame.cpp" />
+    <ClCompile Include="NumberDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GoblinLevel.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="NumberDisplay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
