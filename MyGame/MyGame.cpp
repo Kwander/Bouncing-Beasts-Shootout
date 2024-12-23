@@ -16,9 +16,9 @@ class MyGameApplication : public Quad::QuadApplication
 		currentLevel = std::make_unique<GoblinLevel>();
 
 		// Initialize guns with different fire rates and damage
-		guns.push_back(std::make_unique<Gun>("Assets/gun1hold.png", "Assets/gun1fire.png", 0.6f, 1)); // Slow, 1 damage PISTOL
+		guns.push_back(std::make_unique<Gun>("Assets/gun1hold.png", "Assets/gun1fire.png", 0.4f, 1)); // Faster pistol
 		guns.push_back(std::make_unique<Gun>("Assets/gun2hold.png", "Assets/gun2fire.png", 0.2f, 1)); // Fast, 1 damage
-		guns.push_back(std::make_unique<Gun>("Assets/gun3hold.png", "Assets/gun3fire.png", 0.6f, 3)); // Slow, 3 damage AWP
+		guns.push_back(std::make_unique<Gun>("Assets/gun3hold.png", "Assets/gun3fire.png", 0.7f, 3)); // Slower AWP
 		guns.push_back(std::make_unique<Gun>("Assets/gun4hold.png", "Assets/gun4fire.png", 0.1f, 1)); // Fast, 1 damage UZI
 		currentGunIndex = 0;
 	}

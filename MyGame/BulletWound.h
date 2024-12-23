@@ -7,7 +7,7 @@ public:
     enum class WoundType
     {
         GOBLIN,
-        CAT
+        NORMAL
     };
 
     BulletWound(int x, int y, WoundType type, bool alternateImage = false);

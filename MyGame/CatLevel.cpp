@@ -63,7 +63,7 @@ void CatLevel::Update()
         {
             std::string imagePath = "Assets/cat lvl/cat (" + std::to_string(spawnedEnemies + 1) + ").png";
             QUAD_LOG("Spawning cat enemy: " << imagePath);
-            enemies.push_back(std::make_unique<Enemy>(imagePath, rand() % 800, rand() % 600, 1));
+            enemies.push_back(std::make_unique<Enemy>(imagePath, rand() % 800, rand() % 600, 1, Enemy::MovementType::ERRATIC));
             spawnTimer = 0.0f;
             spawnedEnemies++;
         }
@@ -86,7 +86,7 @@ void CatLevel::HandleClick(const Quad::Cursor &cursor, bool canFire, int damage)
         if (enemy->IsClicked(cursor))
         {
             enemy->Hit(damage);
-            bulletWounds.push_back(std::make_unique<BulletWound>(x, y, BulletWound::WoundType::CAT));
+            bulletWounds.push_back(std::make_unique<BulletWound>(x, y, BulletWound::WoundType::NORMAL));
         }
     }
 }
