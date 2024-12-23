@@ -11,6 +11,7 @@ public:
     bool IsActive() const { return active; }
     void SetActive(bool isActive) { active = isActive; }
     bool ShouldDealDamage();
+    void Hit(int damage);
 
 private:
     Quad::Unit sprite;
@@ -20,4 +21,6 @@ private:
     static constexpr float ANIMATION_INTERVAL{0.5f};
     static constexpr float DAMAGE_INTERVAL{2.5f};
     bool isFirstFrame{true};
+    int hits{0};
+    static constexpr int HITS_TO_DIE{2};
 };

@@ -30,7 +30,7 @@ bool Enemy::ShouldDealDamage()
     if (!active || damageTimer < DAMAGE_INTERVAL)
         return false;
 
-    damageTimer = 0.0f; 
+    damageTimer = 0.0f;
     return true;
 }
 
@@ -45,4 +45,15 @@ void Enemy::Draw()
 bool Enemy::IsClicked(const Quad::Cursor &cursor) const
 {
     return active && cursor.IsClickingOn(sprite);
+}
+
+void Enemy::Hit(int damage)
+{
+    hits += damage;
+    QUAD_LOG("Enemy hit! Current hits: " << hits);
+    if (hits >= HITS_TO_DIE)
+    {
+        active = false;
+        QUAD_LOG("Enemy died!");
+    }
 }

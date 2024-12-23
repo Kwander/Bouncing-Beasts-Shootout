@@ -31,13 +31,16 @@ void GoblinLevel::Update()
     }
 }
 
-void GoblinLevel::HandleClick(const Quad::Cursor &cursor)
+void GoblinLevel::HandleClick(const Quad::Cursor &cursor, bool canFire, int damage)
 {
+    if (!canFire)
+        return;
+
     for (auto &enemy : enemies)
     {
         if (enemy->IsClicked(cursor))
         {
-            enemy->SetActive(false);
+            enemy->Hit(damage);
         }
     }
 }

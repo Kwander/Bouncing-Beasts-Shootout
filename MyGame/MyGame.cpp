@@ -14,11 +14,11 @@ class MyGameApplication : public Quad::QuadApplication
 						   { MyKeysHandler(event); });
 		currentLevel = std::make_unique<GoblinLevel>();
 
-		// Initialize guns
-		guns.push_back(std::make_unique<Gun>("Assets/gun1hold.png", "Assets/gun1fire.png"));
-		guns.push_back(std::make_unique<Gun>("Assets/gun2hold.png", "Assets/gun2fire.png"));
-		guns.push_back(std::make_unique<Gun>("Assets/gun3hold.png", "Assets/gun3fire.png"));
-		guns.push_back(std::make_unique<Gun>("Assets/gun4hold.png", "Assets/gun4fire.png"));
+		// Initialize guns with different fire rates and damage
+		guns.push_back(std::make_unique<Gun>("Assets/gun1hold.png", "Assets/gun1fire.png", 0.6f, 1)); // Slow, 1 damage PISTOL
+		guns.push_back(std::make_unique<Gun>("Assets/gun2hold.png", "Assets/gun2fire.png", 0.2f, 1)); // Fast, 1 damage
+		guns.push_back(std::make_unique<Gun>("Assets/gun3hold.png", "Assets/gun3fire.png", 0.6f, 3)); // Slow, 3 damage AWP
+		guns.push_back(std::make_unique<Gun>("Assets/gun4hold.png", "Assets/gun4fire.png", 0.1f, 1)); // Fast, 1 damage UZI
 		currentGunIndex = 0;
 	}
 
@@ -36,13 +36,14 @@ class MyGameApplication : public Quad::QuadApplication
 		{
 			currentLevel->Update();
 			currentLevel->Draw();
+			guns[currentGunIndex]->Update();
 			guns[currentGunIndex]->Draw();
 
 			if (cursor.IsClicking())
 			{
 				if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
 				{
-					goblinLevel->HandleClick(cursor);
+					goblinLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
 				}
 				guns[currentGunIndex]->TriggerFire();
 			}
