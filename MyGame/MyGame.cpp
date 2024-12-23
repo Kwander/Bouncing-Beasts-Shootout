@@ -22,6 +22,7 @@ class MyGameApplication : public Quad::QuadApplication
 		}
 		else
 		{
+			Quad::Renderer::Draw(background);
 			Quad::Renderer::Draw(hero);
 		}
 	}
@@ -29,6 +30,7 @@ class MyGameApplication : public Quad::QuadApplication
 private:
 	bool isStartScreen{true};
 	Quad::Unit startScreen{"Assets/START_SCREEN.png", 0, 0};
+	Quad::Unit background{"Assets/goblinlvlbackground (1).jpg", 0, 0};
 	Quad::Unit hero{"../Quad/QuadAssets/Images/cookie.jpg", 100, 100};
 	Quad::Cursor cursor;
 
