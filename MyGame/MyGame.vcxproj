@@ -141,6 +141,7 @@
     <ClCompile Include="GoblinLevel.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="MonsterLevel.cpp" />
     <ClCompile Include="MyGame.cpp" />
     <ClCompile Include="NumberDisplay.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="GoblinLevel.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="MonsterLevel.h" />
     <ClInclude Include="NumberDisplay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

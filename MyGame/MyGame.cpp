@@ -3,6 +3,7 @@
 #include "GoblinLevel.h"
 #include "Gun.h"
 #include "CatLevel.h"
+#include "MonsterLevel.h"
 #include <vector>
 #include <memory>
 
@@ -48,20 +49,7 @@ class MyGameApplication : public Quad::QuadApplication
 					guns[currentGunIndex]->Update();
 					guns[currentGunIndex]->Draw();
 				}
-			}
-			else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
-			{
-				if (!catLevel->IsGameOver() && !catLevel->IsLevelCleared())
-				{
-					guns[currentGunIndex]->Update();
-					guns[currentGunIndex]->Draw();
-				}
-			}
-
-			// Check for level completion or game over
-			if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
-			{
-				if (goblinLevel->IsGameOver() && cursor.IsClicking() && goblinLevel->CanTransition())
+				else if (goblinLevel->IsGameOver() && cursor.IsClicking() && goblinLevel->CanTransition())
 				{
 					isStartScreen = true;
 					startScreenTimer = 0.0f;
@@ -74,7 +62,24 @@ class MyGameApplication : public Quad::QuadApplication
 			}
 			else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
 			{
-				if (catLevel->IsGameOver() && cursor.IsClicking() && catLevel->CanTransition())
+				if (!catLevel->IsGameOver() && !catLevel->IsLevelCleared())
+				{
+					guns[currentGunIndex]->Update();
+					guns[currentGunIndex]->Draw();
+				}
+				else if (catLevel->IsLevelCleared() && cursor.IsClicking() && catLevel->CanTransition())
+				{
+					currentLevel = std::make_unique<MonsterLevel>();
+				}
+			}
+			else if (MonsterLevel *monsterLevel = dynamic_cast<MonsterLevel *>(currentLevel.get()))
+			{
+				if (!monsterLevel->IsGameOver() && !monsterLevel->IsLevelCleared())
+				{
+					guns[currentGunIndex]->Update();
+					guns[currentGunIndex]->Draw();
+				}
+				if (monsterLevel->IsGameOver() && cursor.IsClicking() && monsterLevel->CanTransition())
 				{
 					isStartScreen = true;
 					startScreenTimer = 0.0f;
@@ -92,6 +97,10 @@ class MyGameApplication : public Quad::QuadApplication
 				else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
 				{
 					catLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
+				}
+				else if (MonsterLevel *monsterLevel = dynamic_cast<MonsterLevel *>(currentLevel.get()))
+				{
+					monsterLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
 				}
 				guns[currentGunIndex]->TriggerFire();
 			}
