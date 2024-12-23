@@ -135,10 +135,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MyGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="Level.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
