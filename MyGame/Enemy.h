@@ -18,6 +18,6 @@ private:
     float animationTimer{0.0f};
     float damageTimer{0.0f};
     static constexpr float ANIMATION_INTERVAL{0.5f};
-    static constexpr float DAMAGE_INTERVAL{4.0f};
+    static constexpr float DAMAGE_INTERVAL{2.5f};
     bool isFirstFrame{true};
 };

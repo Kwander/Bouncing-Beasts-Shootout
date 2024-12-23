@@ -31,6 +31,17 @@ void GoblinLevel::Update()
     }
 }
 
+void GoblinLevel::HandleClick(const Quad::Cursor &cursor)
+{
+    for (auto &enemy : enemies)
+    {
+        if (enemy->IsClicked(cursor))
+        {
+            enemy->SetActive(false);
+        }
+    }
+}
+
 void GoblinLevel::Draw()
 {
     if (IsGameOver())

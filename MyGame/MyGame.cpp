@@ -40,6 +40,10 @@ class MyGameApplication : public Quad::QuadApplication
 
 			if (cursor.IsClicking())
 			{
+				if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
+				{
+					goblinLevel->HandleClick(cursor);
+				}
 				guns[currentGunIndex]->TriggerFire();
 			}
 			else
