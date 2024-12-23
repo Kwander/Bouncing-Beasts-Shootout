@@ -16,8 +16,8 @@ public:
     bool IsLevelCleared() const { return levelCleared; }
 
 private:
-    Quad::Unit gameOverScreen{"Assets/goblinlvlgameover.png", 0, 0};
-    Quad::Unit levelClearScreen{"Assets/goblinlvlclear.png", 0, 0};
+    Quad::Unit gameOverScreen{"Assets/goblin lvl/goblinlvlgameover.png", 0, 0};
+    Quad::Unit levelClearScreen{"Assets/goblin lvl/goblinlvlclear.png", 0, 0};
     NumberDisplay numberDisplay;
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<std::unique_ptr<BulletWound>> bulletWounds;

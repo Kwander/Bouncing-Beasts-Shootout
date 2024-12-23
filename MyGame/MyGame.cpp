@@ -17,10 +17,10 @@ class MyGameApplication : public Quad::QuadApplication
 		currentLevel = std::make_unique<GoblinLevel>();
 
 		// Initialize guns with different fire rates and damage
-		guns.push_back(std::make_unique<Gun>("Assets/gun1hold.png", "Assets/gun1fire.png", 0.4f, 1)); // Faster pistol
-		guns.push_back(std::make_unique<Gun>("Assets/gun2hold.png", "Assets/gun2fire.png", 0.2f, 1)); // Fast, 1 damage
-		guns.push_back(std::make_unique<Gun>("Assets/gun3hold.png", "Assets/gun3fire.png", 0.7f, 3)); // Slower AWP
-		guns.push_back(std::make_unique<Gun>("Assets/gun4hold.png", "Assets/gun4fire.png", 0.1f, 1)); // Fast, 1 damage UZI
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun1hold.png", "Assets/guns/gun1fire.png", 0.4f, 1)); // Faster pistol
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun2hold.png", "Assets/guns/gun2fire.png", 0.2f, 1)); // Fast, 1 damage
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun3hold.png", "Assets/guns/gun3fire.png", 0.7f, 3)); // Slower AWP
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun4hold.png", "Assets/guns/gun4fire.png", 0.1f, 1)); // Fast, 1 damage UZI
 		currentGunIndex = 0;
 	}
 
@@ -66,6 +66,12 @@ class MyGameApplication : public Quad::QuadApplication
 				{
 					guns[currentGunIndex]->Update();
 					guns[currentGunIndex]->Draw();
+				}
+				else if (catLevel->IsGameOver() && cursor.IsClicking() && catLevel->CanTransition())
+				{
+					isStartScreen = true;
+					startScreenTimer = 0.0f;
+					currentLevel = std::make_unique<GoblinLevel>();
 				}
 				else if (catLevel->IsLevelCleared() && cursor.IsClicking() && catLevel->CanTransition())
 				{
@@ -113,7 +119,7 @@ class MyGameApplication : public Quad::QuadApplication
 
 private:
 	bool isStartScreen{true};
-	Quad::Unit startScreen{"Assets/START_SCREEN.png", 0, 0};
+	Quad::Unit startScreen{"Assets/goblin lvl/START_SCREEN.png", 0, 0};
 	Quad::Cursor cursor;
 	std::unique_ptr<Level> currentLevel;
 	std::vector<std::unique_ptr<Gun>> guns;

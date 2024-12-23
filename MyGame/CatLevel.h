@@ -16,8 +16,8 @@ public:
     bool IsLevelCleared() const { return levelCleared; }
 
 private:
-    Quad::Unit gameOverScreen{"Assets/catlvlgameover.png", 0, 0};
-    Quad::Unit levelClearScreen{"Assets/catlvlclear.png", 0, 0};
+    Quad::Unit gameOverScreen{"Assets/cat lvl/catlvlgameover.png", 0, 0};
+    Quad::Unit levelClearScreen{"Assets/cat lvl/catlvlclear.png", 0, 0};
     NumberDisplay numberDisplay;
     std::vector<std::unique_ptr<Enemy>> enemies;
     std::vector<std::unique_ptr<BulletWound>> bulletWounds;

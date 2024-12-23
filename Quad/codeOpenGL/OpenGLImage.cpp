@@ -4,11 +4,12 @@
 #include "stb_image.h"
 #include "QuadUtilities.h"
 
-namespace Quad {
+namespace Quad
+{
 	OpenGLImage::OpenGLImage()
 	{
 	}
-	OpenGLImage::OpenGLImage(const std::string& filePath)
+	OpenGLImage::OpenGLImage(const std::string &filePath)
 	{
 		glGenTextures(1, &mImage);
 		glBindTexture(GL_TEXTURE_2D, mImage);
@@ -17,39 +18,30 @@ namespace Quad {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		//unsigned char* data{ nullptr };
-		//int nrChannels{ 0 };
-		//stbi_set_flip_vertically_on_load(true);
-		//data = stbi_load(filePath.c_str(), &mWidth, &mHeight, &nrChannels, 0);
-
-		//if (data) {
-		//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // possibly WRONG it's out of the screen hes recording in tooo zoomed in.
-		//	glGenerateMipmap(GL_TEXTURE_2D);
-		//}
-		//else {
-		//	QUAD_ERROR("Failed to load texture");
-		//}
-		//stbi_image_free(data);
-		unsigned char* data{ nullptr };
-		int nrChannels{ 0 };
+		unsigned char *data{nullptr};
+		int nrChannels{0};
 		stbi_set_flip_vertically_on_load(true);
 		data = stbi_load(filePath.c_str(), &mWidth, &mHeight, &nrChannels, 0);
 
-		if (data) {
+		if (data)
+		{
+			// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // possibly WRONG it's out of the screen hes recording in tooo zoomed in.
+			// Modified from original RGBA-only version to support multiple image formats (RGB/JPG and RGBA/PNG) [There were access violations with RGB images]
 			GLenum format = (nrChannels == 4) ? GL_RGBA : (nrChannels == 3 ? GL_RGB : GL_RED);
 			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			glTexImage2D(GL_TEXTURE_2D, 0, format, mWidth, mHeight, 0, format, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
-		else {
-			QUAD_ERROR("Failed to load texture");
+		else
+		{
+			QUAD_ERROR("Failed to load texture: " << filePath);
 		}
 		stbi_image_free(data);
-
 	}
-	void OpenGLImage::LoadImage(const std::string& filePath)
+	void OpenGLImage::LoadImage(const std::string &filePath)
 	{
-		if (mImage) {
+		if (mImage)
+		{
 			glDeleteTextures(1, &mImage);
 		}
 		glGenTextures(1, &mImage);
@@ -59,38 +51,28 @@ namespace Quad {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		//unsigned char* data{ nullptr };
-		//int nrChannels{ 0 };
-		//stbi_set_flip_vertically_on_load(true);
-		//data = stbi_load(filePath.c_str(), &mWidth, &mHeight, &nrChannels, 0);
-		//if (data) {
-		//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // possibly WRONG it's out of the screen hes recording in tooo zoomed in.
-		//	glGenerateMipmap(GL_TEXTURE_2D);
-		//}
-		//else {
-		//	QUAD_ERROR("Failed to load texture");
-		//}
-		//stbi_image_free(data);
-		unsigned char* data{ nullptr };
-		int nrChannels{ 0 };
+		unsigned char *data{nullptr};
+		int nrChannels{0};
 		stbi_set_flip_vertically_on_load(true);
 		data = stbi_load(filePath.c_str(), &mWidth, &mHeight, &nrChannels, 0);
-
-		if (data) {
+		if (data)
+		{
+			// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // possibly WRONG it's out of the screen hes recording in tooo zoomed in.
+			// Modified from original RGBA-only version to support multiple image formats (RGB/JPG and RGBA/PNG) [There were access violations with RGB images]
 			GLenum format = (nrChannels == 4) ? GL_RGBA : (nrChannels == 3 ? GL_RGB : GL_RED);
-			glPixelStorei(GL_UNPACK_ALIGNMENT, 1); 
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			glTexImage2D(GL_TEXTURE_2D, 0, format, mWidth, mHeight, 0, format, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
-		else {
-			QUAD_ERROR("Failed to load texture");
+		else
+		{
+			QUAD_ERROR("Failed to load texture: " << filePath);
 		}
 		stbi_image_free(data);
-
 	}
 	bool OpenGLImage::HasImage() const
 	{
-		return mImage ?true:false ;
+		return mImage ? true : false;
 	}
 	int OpenGLImage::GetWidth() const
 	{
@@ -103,7 +85,6 @@ namespace Quad {
 	void OpenGLImage::Bind()
 	{
 		glBindTexture(GL_TEXTURE_2D, mImage);
-
 	}
 	OpenGLImage::~OpenGLImage()
 	{

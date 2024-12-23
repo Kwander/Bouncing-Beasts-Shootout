@@ -1,6 +1,6 @@
 #include "MonsterLevel.h"
 
-MonsterLevel::MonsterLevel() : Level("Assets/monsterlvlbackground.png")
+MonsterLevel::MonsterLevel() : Level("Assets/monster lvl/monsterlvlbackground.png")
 {
 }
 

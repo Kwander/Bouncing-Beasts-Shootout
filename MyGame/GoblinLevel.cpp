@@ -1,6 +1,6 @@
 #include "GoblinLevel.h"
 
-GoblinLevel::GoblinLevel() : Level("Assets/goblinlvlbackground (1).jpg")
+GoblinLevel::GoblinLevel() : Level("Assets/goblin lvl/goblinlvlbackground (1).jpg")
 {
 }
 

@@ -1,6 +1,6 @@
 #include "CatLevel.h"
 
-CatLevel::CatLevel() : Level("Assets/catlvlbackground.png")
+CatLevel::CatLevel() : Level("Assets/cat lvl/catlvlbackground.png")
 {
 }
 
