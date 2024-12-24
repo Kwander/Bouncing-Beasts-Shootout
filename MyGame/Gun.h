@@ -6,9 +6,8 @@ class Gun
 public:
     Gun(const std::string &holdImagePath, const std::string &fireImagePath, float fireRate, int damage);
     void Draw();
-    void TriggerFire();
-    void SetFiring(bool firing);
     void Update();
+    void TriggerFire();
     bool CanFire() const { return canFire; }
     int GetDamage() const { return damage; }
 

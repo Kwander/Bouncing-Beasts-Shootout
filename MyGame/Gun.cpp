@@ -1,10 +1,7 @@
 #include "Gun.h"
 
 Gun::Gun(const std::string &holdImagePath, const std::string &fireImagePath, float fireRate, int damage)
-    : holdSprite(holdImagePath, 400, 0),
-      fireSprite(fireImagePath, 400, 0),
-      fireRate(fireRate),
-      damage(damage)
+    : holdSprite(holdImagePath, 400, 0), fireSprite(fireImagePath, 400, 0), fireRate(fireRate), damage(damage)
 {
 }
 
@@ -52,9 +49,4 @@ void Gun::TriggerFire()
         cooldownTimer = 0.0f;
         fireDisplayTimer = 0.0f;
     }
-}
-
-void Gun::SetFiring(bool firing)
-{
-    // Removed as we're controlling firing state with timers
 }

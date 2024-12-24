@@ -2,26 +2,14 @@
 
 Level::Level(const std::string &backgroundPath, LevelType type, int maxEnemies,
              float spawnInterval, int enemyHealth, Enemy::MovementType moveType)
-    : background(backgroundPath, 0, 0), levelType(type), maxEnemies(maxEnemies), spawnInterval(spawnInterval), enemyHealth(enemyHealth), enemyMoveType(moveType), gameOverScreen("", 0, 0), levelClearScreen("", 0, 0)
+    : background(backgroundPath, 0, 0), levelType(type), maxEnemies(maxEnemies), spawnInterval(spawnInterval), enemyHealth(enemyHealth), enemyMoveType(moveType), gameOverScreen((type == LevelType::GOBLIN ? "Assets/goblin lvl/gameover.png" : type == LevelType::CAT ? "Assets/cat lvl/gameover.png"
+                                                                                                                                                                                                                                                                        : "Assets/monster lvl/gameover.png"),
+                                                                                                                                                                                 0, 0),
+      levelClearScreen((type == LevelType::GOBLIN ? "Assets/goblin lvl/clear.png" : type == LevelType::CAT ? "Assets/cat lvl/clear.png"
+                                                                                                           : "Assets/monster lvl/clear.png"),
+                       0, 0)
 {
-    // Initialize screens based on level type
-    std::string basePath;
-    switch (type)
-    {
-    case LevelType::GOBLIN:
-        basePath = "Assets/goblin lvl/";
-        break;
-    case LevelType::CAT:
-        basePath = "Assets/cat lvl/";
-        break;
-    case LevelType::MONSTER:
-        basePath = "Assets/monster lvl/";
-        break;
-    }
-
-    // Now properly set the screens
-    gameOverScreen = Quad::Unit(basePath + "gameover.png", 0, 0);
-    levelClearScreen = Quad::Unit(basePath + "clear.png", 0, 0);
+    // No need to reassign screens here anymore
 }
 
 void Level::Update()

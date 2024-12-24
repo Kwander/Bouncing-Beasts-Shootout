@@ -12,15 +12,15 @@ class MyGameApplication : public Quad::QuadApplication
 	virtual void Initialize() override
 	{
 		QUAD_LOG("Starting...");
+		startScreen = Quad::Unit("Assets/goblin lvl/START_SCREEN.png", 0, 0);
 		SetKeyEventHandler([this](const Quad::KeyEvent &event)
 						   { MyKeysHandler(event); });
-		currentLevel = std::make_unique<GoblinLevel>();
 
-		// Initialize guns with different fire rates and damage
-		guns.push_back(std::make_unique<Gun>("Assets/guns/gun1hold.png", "Assets/guns/gun1fire.png", 0.4f, 1)); // Faster pistol
-		guns.push_back(std::make_unique<Gun>("Assets/guns/gun2hold.png", "Assets/guns/gun2fire.png", 0.2f, 1)); // Fast, 1 damage
-		guns.push_back(std::make_unique<Gun>("Assets/guns/gun3hold.png", "Assets/guns/gun3fire.png", 0.7f, 3)); // Slower AWP
-		guns.push_back(std::make_unique<Gun>("Assets/guns/gun4hold.png", "Assets/guns/gun4fire.png", 0.1f, 1)); // Fast, 1 damage UZI
+		// Initialize guns
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun1hold.png", "Assets/guns/gun1fire.png", 0.4f, 1));
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun2hold.png", "Assets/guns/gun2fire.png", 0.2f, 1));
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun3hold.png", "Assets/guns/gun3fire.png", 0.7f, 3));
+		guns.push_back(std::make_unique<Gun>("Assets/guns/gun4hold.png", "Assets/guns/gun4fire.png", 0.1f, 1));
 		currentGunIndex = 0;
 	}
 
@@ -80,10 +80,6 @@ class MyGameApplication : public Quad::QuadApplication
 			currentLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(),
 									  guns[currentGunIndex]->GetDamage());
 			guns[currentGunIndex]->TriggerFire();
-		}
-		else
-		{
-			guns[currentGunIndex]->SetFiring(false);
 		}
 	}
 
