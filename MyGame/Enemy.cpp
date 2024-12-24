@@ -22,13 +22,13 @@ void Enemy::Update()
 
     if (movementType == MovementType::ERRATIC)
     {
-        // Update position
+        
         int x = sprite.GetXCoord();
         int y = sprite.GetYCoord();
         x += static_cast<int>(velocityX);
         y += static_cast<int>(velocityY);
 
-        // Bounce off screen edges
+        
         if (x < 0 || x > 800)
         {
             velocityX = -velocityX;
@@ -47,7 +47,7 @@ void Enemy::Update()
         if (directionTimer >= DIRECTION_CHANGE_INTERVAL)
         {
             if (rand() % 3 == 0)
-            { // 33% chance to change direction
+            { 
                 velocityX = (rand() % 200 - 100) / 100.0f * ERRATIC_SPEED;
                 velocityY = (rand() % 200 - 100) / 100.0f * ERRATIC_SPEED;
             }
@@ -60,7 +60,7 @@ void Enemy::Update()
         int x = sprite.GetXCoord();
         x += static_cast<int>(normalSpeed);
 
-        // Reverse direction if we've moved too far from start position
+        
         if (x > startX + SHUFFLE_RANGE || x < startX - SHUFFLE_RANGE)
         {
             normalSpeed = -normalSpeed;

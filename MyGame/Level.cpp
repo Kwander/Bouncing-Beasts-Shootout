@@ -9,7 +9,6 @@ Level::Level(const std::string &backgroundPath, LevelType type, int maxEnemies,
                                                                                                            : "Assets/monster lvl/clear.png"),
                        0, 0)
 {
-    // No need to reassign screens here anymore
 }
 
 void Level::Update()
@@ -20,7 +19,7 @@ void Level::Update()
         return;
     }
 
-    // Check if all enemies are defeated
+    
     bool allEnemiesDefeated = true;
     for (const auto &enemy : enemies)
     {
@@ -37,7 +36,7 @@ void Level::Update()
         return;
     }
 
-    // Update enemies
+    
     for (auto &enemy : enemies)
     {
         enemy->Update();
@@ -47,7 +46,7 @@ void Level::Update()
         }
     }
 
-    // Update bullet wounds
+    
     for (auto it = bulletWounds.begin(); it != bulletWounds.end();)
     {
         (*it)->Update();
@@ -61,7 +60,7 @@ void Level::Update()
         }
     }
 
-    // Spawn enemies
+    
     if (spawnedEnemies < maxEnemies)
     {
         spawnTimer += 1.0f / 60.0f;

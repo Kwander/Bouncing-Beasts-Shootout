@@ -11,12 +11,10 @@ class MyGameApplication : public Quad::QuadApplication
 {
 	virtual void Initialize() override
 	{
-		QUAD_LOG("Starting...");
 		startScreen = Quad::Unit("Assets/goblin lvl/START_SCREEN.png", 0, 0);
 		SetKeyEventHandler([this](const Quad::KeyEvent &event)
 						   { MyKeysHandler(event); });
 
-		// Initialize guns
 		guns.push_back(std::make_unique<Gun>("Assets/guns/gun1hold.png", "Assets/guns/gun1fire.png", 0.4f, 1));
 		guns.push_back(std::make_unique<Gun>("Assets/guns/gun2hold.png", "Assets/guns/gun2fire.png", 0.2f, 1));
 		guns.push_back(std::make_unique<Gun>("Assets/guns/gun3hold.png", "Assets/guns/gun3fire.png", 0.7f, 3));
@@ -41,7 +39,6 @@ class MyGameApplication : public Quad::QuadApplication
 		currentLevel->Update();
 		currentLevel->Draw();
 
-		// Handle level state and transitions
 		if (!currentLevel->IsGameOver() && !currentLevel->IsLevelCleared())
 		{
 			guns[currentGunIndex]->Update();
@@ -65,16 +62,10 @@ class MyGameApplication : public Quad::QuadApplication
 				case Level::LevelType::CAT:
 					currentLevel = std::make_unique<MonsterLevel>();
 					break;
-				case Level::LevelType::MONSTER:
-					isStartScreen = true;
-					startScreenTimer = 0.0f;
-					currentLevel = std::make_unique<GoblinLevel>();
-					break;
 				}
 			}
 		}
 
-		// Handle shooting
 		if (cursor.IsClicking())
 		{
 			currentLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(),
