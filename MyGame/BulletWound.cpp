@@ -2,7 +2,7 @@
 
 bool BulletWound::nextImageAlternate = false;
 
-BulletWound::BulletWound(int x, int y, WoundType type, bool alternateImage)
+BulletWound::BulletWound(int x, int y, WoundType type)
     : sprite(
           type == WoundType::GOBLIN
               ? (nextImageAlternate ? "Assets/guns/bulletwoundgoblin2.png" : "Assets/guns/bulletwoundgoblin.png")

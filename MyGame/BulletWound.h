@@ -10,7 +10,7 @@ public:
         NORMAL
     };
 
-    BulletWound(int x, int y, WoundType type, bool alternateImage = false);
+    BulletWound(int x, int y, WoundType type);
     void Draw();
     bool IsExpired() const { return lifetime >= MAX_LIFETIME; }
     void Update();

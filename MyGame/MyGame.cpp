@@ -35,85 +35,55 @@ class MyGameApplication : public Quad::QuadApplication
 				isStartScreen = false;
 				currentLevel = std::make_unique<GoblinLevel>();
 			}
+			return;
+		}
+
+		currentLevel->Update();
+		currentLevel->Draw();
+
+		// Handle level state and transitions
+		if (!currentLevel->IsGameOver() && !currentLevel->IsLevelCleared())
+		{
+			guns[currentGunIndex]->Update();
+			guns[currentGunIndex]->Draw();
+		}
+		else if (currentLevel->CanTransition() && cursor.IsClicking())
+		{
+			if (currentLevel->IsGameOver())
+			{
+				isStartScreen = true;
+				startScreenTimer = 0.0f;
+				currentLevel = std::make_unique<GoblinLevel>();
+			}
+			else if (currentLevel->IsLevelCleared())
+			{
+				switch (currentLevel->GetType())
+				{
+				case Level::LevelType::GOBLIN:
+					currentLevel = std::make_unique<CatLevel>();
+					break;
+				case Level::LevelType::CAT:
+					currentLevel = std::make_unique<MonsterLevel>();
+					break;
+				case Level::LevelType::MONSTER:
+					isStartScreen = true;
+					startScreenTimer = 0.0f;
+					currentLevel = std::make_unique<GoblinLevel>();
+					break;
+				}
+			}
+		}
+
+		// Handle shooting
+		if (cursor.IsClicking())
+		{
+			currentLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(),
+									  guns[currentGunIndex]->GetDamage());
+			guns[currentGunIndex]->TriggerFire();
 		}
 		else
 		{
-			currentLevel->Update();
-			currentLevel->Draw();
-
-			// Only draw gun if we're not in a game over or level cleared state
-			if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
-			{
-				if (!goblinLevel->IsGameOver() && !goblinLevel->IsLevelCleared())
-				{
-					guns[currentGunIndex]->Update();
-					guns[currentGunIndex]->Draw();
-				}
-				else if (goblinLevel->IsGameOver() && cursor.IsClicking() && goblinLevel->CanTransition())
-				{
-					isStartScreen = true;
-					startScreenTimer = 0.0f;
-					currentLevel = std::make_unique<GoblinLevel>();
-				}
-				else if (goblinLevel->IsLevelCleared() && cursor.IsClicking() && goblinLevel->CanTransition())
-				{
-					currentLevel = std::make_unique<CatLevel>();
-				}
-			}
-			else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
-			{
-				if (!catLevel->IsGameOver() && !catLevel->IsLevelCleared())
-				{
-					guns[currentGunIndex]->Update();
-					guns[currentGunIndex]->Draw();
-				}
-				else if (catLevel->IsGameOver() && cursor.IsClicking() && catLevel->CanTransition())
-				{
-					isStartScreen = true;
-					startScreenTimer = 0.0f;
-					currentLevel = std::make_unique<GoblinLevel>();
-				}
-				else if (catLevel->IsLevelCleared() && cursor.IsClicking() && catLevel->CanTransition())
-				{
-					currentLevel = std::make_unique<MonsterLevel>();
-				}
-			}
-			else if (MonsterLevel *monsterLevel = dynamic_cast<MonsterLevel *>(currentLevel.get()))
-			{
-				if (!monsterLevel->IsGameOver() && !monsterLevel->IsLevelCleared())
-				{
-					guns[currentGunIndex]->Update();
-					guns[currentGunIndex]->Draw();
-				}
-				if (monsterLevel->IsGameOver() && cursor.IsClicking() && monsterLevel->CanTransition())
-				{
-					isStartScreen = true;
-					startScreenTimer = 0.0f;
-					currentLevel = std::make_unique<GoblinLevel>();
-				}
-			}
-
-			// Handle shooting
-			if (cursor.IsClicking())
-			{
-				if (GoblinLevel *goblinLevel = dynamic_cast<GoblinLevel *>(currentLevel.get()))
-				{
-					goblinLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
-				}
-				else if (CatLevel *catLevel = dynamic_cast<CatLevel *>(currentLevel.get()))
-				{
-					catLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
-				}
-				else if (MonsterLevel *monsterLevel = dynamic_cast<MonsterLevel *>(currentLevel.get()))
-				{
-					monsterLevel->HandleClick(cursor, guns[currentGunIndex]->CanFire(), guns[currentGunIndex]->GetDamage());
-				}
-				guns[currentGunIndex]->TriggerFire();
-			}
-			else
-			{
-				guns[currentGunIndex]->SetFiring(false);
-			}
+			guns[currentGunIndex]->SetFiring(false);
 		}
 	}
 
@@ -145,7 +115,7 @@ private:
 			case QUAD_KEY_4:
 				currentGunIndex = 3;
 				break;
-			case QUAD_KEY_H: // Keep health test
+			case QUAD_KEY_H: // health decrease test
 				currentLevel->SetPlayerHealth(currentLevel->GetPlayerHealth() - 10);
 				break;
 			}
